@@ -1,4 +1,5 @@
 import {createInstance} from './ckan.js'
+import _ from 'lodash'
 require('normalize.css')
 require('@/main.css')
 
@@ -11,7 +12,7 @@ const _redboxConfig = {
     'RIF_CSGroup': 'The University of Examples, Australia'
   },
   'urlBase': `${process.env.CKAN_REDBOX_URL}`,
-  'organization': 'test2'
+  'organization': 'test3'
 }
 
 const _redboxRecord = {
@@ -94,18 +95,10 @@ const _redboxRecord = {
 
 const ckan = createInstance(_redboxConfig)
 
-document.getElementById('send-org-to-ckan').onclick = function() {
-  sendOrgToCkan()
-}
-document.getElementById('send-dataset-to-ckan').onclick = function() {
-  sendDatasetToCkan()
-}
-
-function sendOrgToCkan() {
-  console.log('sending org data to ckan...')
-  ckan.createOrganization()
-}
-
-function sendDatasetToCkan() {
-  console.log('sending dataset data to ckan...')
+for (const el of document.getElementsByClassName('ckan-api')) {
+  el.onclick = function(event) {
+    // ensure element id follows javascript convention of kebab-case and corresponding ckan method match for camelCase
+    const fn = _.camelCase(event.target.id)
+    ckan[fn]()
+  }
 }

@@ -22,8 +22,8 @@ class Ckan {
   }
 
   deleteOrganization(redboxConfig) {
-    this.postToCkan('/organization_create', {
-      name: this.config.organization
+    this.postToCkan('/organization_delete', {
+      id: this.config.organization
     })
   }
 
