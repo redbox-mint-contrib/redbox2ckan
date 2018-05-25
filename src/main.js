@@ -1,4 +1,4 @@
-import {ckan} from './ckan.js'
+import {createInstance} from './ckan.js'
 require('normalize.css')
 require('@/main.css')
 
@@ -92,6 +92,8 @@ const _redboxRecord = {
 // logo.setAttribute('src', logoSrc)
 // document.getElementById('app').appendChild(logo)
 
+const ckan = createInstance(_redboxConfig)
+
 document.getElementById('send-org-to-ckan').onclick = function() {
   sendOrgToCkan()
 }
@@ -101,7 +103,7 @@ document.getElementById('send-dataset-to-ckan').onclick = function() {
 
 function sendOrgToCkan() {
   console.log('sending org data to ckan...')
-  ckan.createOrganization(_redboxConfig)
+  ckan.createOrganization()
 }
 
 function sendDatasetToCkan() {

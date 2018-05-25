@@ -1,8 +1,9 @@
 import axios from 'axios'
 
 class Ckan {
-  constructor() {
+  constructor(config) {
     this.ckanBaseUrl = process.env.CKAN_BASE_URL
+    this.config = config
     this._api = axios.create({
       baseURL: `${this.ckanBaseUrl}/api/action`,
       timeout: 10000,
@@ -14,9 +15,15 @@ class Ckan {
     })
   }
 
-  createOrganization(redboxConfig) {
+  createOrganization() {
     this.postToCkan('/organization_create', {
-      name: redboxConfig.organization
+      name: this.config.organization
+    })
+  }
+
+  deleteOrganization(redboxConfig) {
+    this.postToCkan('/organization_create', {
+      name: this.config.organization
     })
   }
 
@@ -31,8 +38,7 @@ class Ckan {
   }
 }
 
-const ckan = new Ckan()
-
-export {
-  ckan
+export function createInstance(config) {
+  const ckan = new Ckan(config)
+  return ckan
 }
