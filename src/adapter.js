@@ -9,7 +9,8 @@ class Adapter {
       title: dataset.metadata.title,
       author: dataset.metaMetadata.createdBy,
       notes: dataset.metadata.description,
-      owner_org: data.ownerOrgId
+      owner_org: data.ownerOrgId,
+      extras: dataset.metadata
     }
     return ckanDataset
   }
