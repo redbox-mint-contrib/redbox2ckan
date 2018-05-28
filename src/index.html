@@ -10,8 +10,19 @@
   <body>
     <div id="app"></div>
     <!-- built files will be auto injected -->
-    <button id="create-organization" class="ckan-api">create organization</button>
-    <button id="delete-organization" class="ckan-api">delete organization</button>
-    <button id="send-dataset" class="ckan-click">create dataset</button>
+    <div>
+      <label>Value:</label>
+      <input id="ckan-value" type="text" />
+    </div>
+    <div class="ckan-buttons">
+      <span>
+        <button id="create-organization" class="ckan-api">create organization</button>
+        <button id="delete-organization" class="ckan-api">delete organization</button>
+      </span>
+      <span>
+        <button id="create-package" class="ckan-api">create dataset</button>
+        <button id="delete-package" class="ckan-api">delete dataset</button>
+      </span>
+    </div>
   </body>
 </html>

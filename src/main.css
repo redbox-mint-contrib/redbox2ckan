@@ -1,0 +1,13 @@
+.ckan-buttons {
+  display: inline-block;
+}
+
+span {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
+
+button {
+  margin: 10px;
+}

@@ -34,14 +34,4 @@ const dev = {
   ]
 }
 
-// console.log(require('dotenv').config())
-// console.log(require('dotenv').config().parsed)
-// console.log(nEnv)
-// console.log(process.env)
-// console.log(process.env.CKAN_BASE_URL)
-// console.log(process.env.CKAN_REDBOX_URL)
-// console.log(process.env.CKAN_ADMIN_API_KEY)
-// console.log(process.env.NODE_ENV)
-// console.log(process.env.foo)
-
 module.exports = merge.smart(base, dev)
