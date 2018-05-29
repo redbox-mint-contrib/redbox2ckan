@@ -1,22 +1,79 @@
 import {Adapter} from './adapter.js'
 
 class Builder {
-  static get fromRedbox() {
-    class RedboxToCkan {
-      constructor(redboxDataset) {
-        this.redboxDataset = _.assign({}, redboxDataset)
+  static get ckanPackage() {
+    class RedboxToCkanPackage {
+      constructor(dataset) {
+        this.dataset = _.assign({}, dataset)
       }
 
-      ownerOrg(orgId) {
-        this.ownerOrgId = orgId
+      ownerOrg(id) {
+        this.ownerOrgId = id
         return this
       }
 
       build() {
-        return Adapter.redboxToCkan(this)
+        return Adapter.redboxToCkanPackage(this)
       }
     }
-    return RedboxToCkan
+    return RedboxToCkanPackage
+  }
+
+  static get ckanResource() {
+    class RedboxDataLocationToCkanResource {
+      constructor(dataset) {
+        this.dataset = _.assign({}, dataset)
+      }
+
+      packageId(id) {
+        this.packageId = id
+        return this
+      }
+
+      url(urlBase) {
+        this.urlBase = urlBase
+        return this
+      }
+
+      build() {
+        return Adapter.redboxDataLocationToCkanResource(this)
+      }
+    }
+    return RedboxDataLocationToCkanResource
+  }
+
+  static get allCkanResources() {
+    class AllRedboxDataLocationsToCkanResources {
+      constructor(datasets) {
+        this.datasets = datasets
+      }
+
+      packageId(id) {
+        this.packageId = id
+        return this
+      }
+
+      url(urlBase) {
+        this.urlBase = urlBase
+        return this
+      }
+
+      build() {
+        const allCkanResources = []
+        // console.log(`datasets are`, this.datasets)
+        for (const dataset of this.datasets) {
+          // console.log(`next dataset`, dataset)
+          allCkanResources.push(new Builder
+            .ckanResource(dataset)
+            .packageId(this.packageId)
+            .url(this.urlBase)
+            .build()
+          )
+        }
+        return allCkanResources
+      }
+    }
+    return AllRedboxDataLocationsToCkanResources
   }
 }
 

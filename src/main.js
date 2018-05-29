@@ -52,7 +52,47 @@ const _redboxRecords = [{
     'endDate': '2018-05-31',
     'timePeriod': '123',
     'geospatial': {},
-    'dataLocations': [],
+    'dataLocations': [
+      {
+        'type': 'attachment',
+        'location': '36940f28431f0419aaf56168e1cda7bd/attach/72570f502d25cb9984d2b897e442a869',
+        'mimeType': 'video/quicktime',
+        'name': '2[6].mov',
+        'fileId': '72570f502d25cb9984d2b897e442a869',
+        'uploadUrl': 'http://localhost:1500/default/rdmp/record/36940f28431f0419aaf56168e1cda7bd/attach/72570f502d25cb9984d2b897e442a869'
+      },
+      {
+        'type': 'attachment',
+        'location': '36940f28431f0419aaf56168e1cda7bd/attach/86b46ad2d84ceb6838771ac49a7e3590',
+        'name': '2-openid.log',
+        'fileId': '86b46ad2d84ceb6838771ac49a7e3590',
+        'uploadUrl': 'http://localhost:1500/default/rdmp/record/36940f28431f0419aaf56168e1cda7bd/attach/86b46ad2d84ceb6838771ac49a7e3590'
+      },
+      {
+        'type': 'attachment',
+        'location': '36940f28431f0419aaf56168e1cda7bd/attach/c1a392c753c8d525040015c055b2c01b',
+        'mimeType': 'video/quicktime',
+        'name': 'Issue-Vipul.mov',
+        'fileId': 'c1a392c753c8d525040015c055b2c01b',
+        'uploadUrl': 'http://localhost:1500/default/rdmp/record/36940f28431f0419aaf56168e1cda7bd/attach/c1a392c753c8d525040015c055b2c01b'
+      },
+      {
+        'type': 'attachment',
+        'location': '36940f28431f0419aaf56168e1cda7bd/attach/28d7aa99eca715be7bf20879915e3ef0',
+        'mimeType': 'application/x-bzip2',
+        'name': 'Firefox 59.0.2.dmg',
+        'fileId': '28d7aa99eca715be7bf20879915e3ef0',
+        'uploadUrl': 'http://localhost:1500/default/rdmp/record/36940f28431f0419aaf56168e1cda7bd/attach/28d7aa99eca715be7bf20879915e3ef0'
+      },
+      {
+        'type': 'attachment',
+        'location': '36940f28431f0419aaf56168e1cda7bd/attach/da54fafc82c86e4ba53aac38cadbf233',
+        'mimeType': 'image/png',
+        'name': 'Screen Shot 2017-11-28 at 9.59.12 am.png',
+        'fileId': 'da54fafc82c86e4ba53aac38cadbf233',
+        'uploadUrl': 'http://localhost:1500/default/rdmp/record/36940f28431f0419aaf56168e1cda7bd/attach/da54fafc82c86e4ba53aac38cadbf233'
+      }
+    ],
     'related_websites': [
       {
         'related_url': '',
