@@ -17,6 +17,28 @@ class Api {
     this.restErrorHandler = new RestErrorHandler()
   }
 
+  async getGroupList() {
+    const response = await this.getFromCkan('/group_list')
+    return response
+  }
+
+  isResponseOk(response) {
+    console.log(`response status: `, response.status)
+    return response.status === 200
+  }
+
+  async hasOrganization(value) {
+    const response = await this.getOrganization(value)
+    return this.isResponseOk(response)
+  }
+
+  async getOrganization(value) {
+    const response = await this.getFromCkan('/organization_show', {
+      id: value
+    })
+    return response
+  }
+
   async getOrganization(value) {
     const response = await this.getFromCkan('/organization_show', {
       id: value
@@ -38,9 +60,23 @@ class Api {
     return response
   }
 
+  async purgeOrganization(value) {
+    const response = await this.postToCkan('/organization_purge', {
+      id: value
+    })
+    return response
+  }
+
   // NB: 'deletes', not purges
   async deletePackage(value) {
     const response = await this.postToCkan('/package_delete', {
+      id: value
+    })
+    return response
+  }
+
+  async purgePackage(value) {
+    const response = await this.postToCkan('/dataset_purge', {
       id: value
     })
     return response
@@ -57,14 +93,13 @@ class Api {
   }
 
   async postToCkan(path, data, params={}) {
-    const self = this
     let response
     try {
       response = await this._api.post(path, data, {
         params: params
       })
     } catch (error) {
-      response = self.restErrorHandler.showResponseDataError(error)
+      response = this.restErrorHandler.showResponseDataError(error)
     } finally {
       return response
     }
@@ -76,9 +111,8 @@ class Api {
       response = await this._api.get(path, {
         params: params
       })
-      return response
     } catch (error) {
-      response = self.restErrorHandler.showResponseDataError(error)
+      response = this.restErrorHandler.showResponseDataError(error)
     } finally {
       return response
     }

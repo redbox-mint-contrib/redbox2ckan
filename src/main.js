@@ -1,6 +1,5 @@
-import {Api} from './api.js'
-import {Builder} from './builder.js'
 import 'lodash/lodash.min.js'
+import {RedboxToCkan} from './redboxToCkan.js'
 require('normalize.css')
 require('@/main.css')
 
@@ -97,63 +96,7 @@ const _redboxRecords = [{
 // logo.setAttribute('src', logoSrc)
 // document.getElementById('app').appendChild(logo)
 
-for (const el of document.getElementsByClassName('ckan-api')) {
-  el.onclick = function(event) {
-    // ensure element id follows javascript convention of kebab-case and corresponding ckan method match for camelCase
-    const fnName = _.camelCase(event.target.id)
-    const value = document.getElementById('ckan-value').value
-    if (hasValidInput(value)) {
-      callCkanApi(_redboxConfig, _redboxRecords, value)
-    }
-  }
-}
-
-async function callCkanApi(redboxConfig, redboxRecords, value) {
-  try {
-    const api = new Api({config: redboxConfig.ckan})
-    switch (fnName) {
-      case 'createOrganization':
-        await api[fnName](_redboxConfig.ckan.ownerOrgId)
-        break
-      case 'createPackage':
-        await createAllRedboxDatasets(_redboxConfig.ckan.ownerOrgId, _redboxConfig.ckan.ownerOrgId)
-        break
-      default:
-        api[fnName](value)
-    }
-  } catch (error) {
-    throw new Error('Unable to complete Ckan api call', error)
-  }
-}
-
-async function createAllRedboxDatasets(ownerOrgId, redboxRecords) {
-  await checkAndSetOrganization(Org)
-  for (const redboxRecord of redboxRecords) {
-    const ckanDataset = new Builder
-      .fromRedbox(redboxRecord)
-      .ownerOrg(ownerOrgId)
-      .build()
-    const response = await api[fnName](ckanDataset)
-    if (response.status !== '200') {
-      console.log('Error: ', response)
-    }
-  }
-}
-
-async function checkAndSetOrganization(ownerOrgId) {
-  if (!hasOrganization(ownerOrgId)) {
-    const response = await api.createOrganization(ownerOrgId)
-    if (response.status !== '200') {
-      throw new Error(`Unable to create org: ${ownerOrgId}`, response)
-    }
-  }
-}
-
-async function hasOrganization(ownerOrgId) {
-  const response = await api.getOrganization(ownerOrgId)
-  console.log(`org response is`, response)
-  return response.status === '200'
-}
+const _redboxToCkan = new RedboxToCkan(_redboxConfig)
 
 function hasValidInput(value) {
   const isValid = _.isString(value) && value.trim().length > 0
@@ -161,4 +104,30 @@ function hasValidInput(value) {
     throw new Error('A string value must be entered.')
   }
   return isValid
+}
+
+for (const el of document.getElementsByClassName('ckan-api')) {
+  el.onclick = function(event) {
+    const value = document.getElementById('ckan-value').value
+    // ensure element id follows javascript convention of kebab-case and corresponding ckan method match for camelCase
+    const fnName = _.camelCase(event.target.id)
+    switch (fnName) {
+      case 'createOrganization':
+        if (hasValidInput(value)) {
+          _redboxToCkan.api[fnName](value)
+        }
+        break
+      case 'createPackage':
+        _redboxToCkan.createAllRedboxDatasets(_redboxRecords)
+        break
+      case 'getGroupList':
+        _redboxToCkan.api[fnName]()
+        break
+      default:
+        if (hasValidInput(value)) {
+          _redboxToCkan.api[fnName](value)
+        }
+        break
+    }
+  }
 }
