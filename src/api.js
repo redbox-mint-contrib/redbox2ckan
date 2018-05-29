@@ -83,7 +83,6 @@ class Api {
   }
 
   async createPackage(value) {
-    console.log(`value is`, value)
     const response = await this.postToCkan('/package_create', value)
     return response
   }

@@ -60,9 +60,7 @@ class Builder {
 
       build() {
         const allCkanResources = []
-        // console.log(`datasets are`, this.datasets)
         for (const dataset of this.datasets) {
-          // console.log(`next dataset`, dataset)
           allCkanResources.push(new Builder
             .ckanResource(dataset)
             .packageId(this.packageId)
