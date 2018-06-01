@@ -10,7 +10,8 @@
   },
   "scripts": {
     "dev": "webpack-dev-server --inline --config ./build/dev",
-    "dist": "rm -rf ./dist && mkdir ./dist && webpack --config ./build/prod"
+    "dist": "rm -rf ./dist && mkdir ./dist && webpack --config ./build/prod",
+    "distUtil": "rm -rf ./dist && mkdir ./dist && webpack --config ./build/utils"
   },
   "license": "MIT",
   "devDependencies": {

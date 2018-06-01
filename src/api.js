@@ -23,7 +23,6 @@ class Api {
   }
 
   isResponseOk(response) {
-    console.log(`response status: `, response.status)
     return response.status === 200
   }
 
