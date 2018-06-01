@@ -1,4 +1,4 @@
-var redboxToCkan = require('./redboxTockan');
+var redboxToCkan = require('./redboxToCkan');
 module.exports = {
   RedboxToCkan: redboxToCkan
 }
