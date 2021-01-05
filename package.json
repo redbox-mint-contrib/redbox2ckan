@@ -37,7 +37,7 @@
     "webpack-merge": "^4.1.0"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "dotenv": "^5.0.1",
     "lodash": "^4.17.13",
     "normalize.css": "^5.0.0",
